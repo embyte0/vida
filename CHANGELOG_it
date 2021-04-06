@@ -1,0 +1,150 @@
+vida-0.8 (middle of May 2003):
+  - aggiunto il supporto per spoofare le rikieste dns. E' ancora in BETA
+  - pulizia del codice
+  - aggiunti un po; di commenti in inglese
+  - cambiata la funzione info..vedere il codice x + info appunto :P
+  - l'indent e' ora con -kr
+  - cambiate le mvwaddstr con le mvwprintw
+  
+vida-0.7.1:
+  - Vida puo' ora visualizzare solo i pacchetti nei cui dati (payload)
+    e' presente la stringa inserita da tastiera
+  - Ho sistemato la manpage, lesion e' ancora al mare :)
+
+vida-0.7:
+  - supporto per l'autenticazione mediante password sul datapipe - ora
+    puoi utilizzare vida come un wingate, un bouncer o un proxy autenticato
+    per nascondere il tuo IP. Non ho implementato un sistema multi-account
+    (come invece ho fatto per ss.tar.gz) in quanto per un datapipe non c'e'
+    il bisogno.
+  - e' stato scritto il README (forse lesion l'ha inserito gia nella pakketto
+    della version 0.6)
+  - ho corretto alcuni piccoli problemi
+
+vida-0.6:
+  - aggiunto il supporto al logging su file (usare il tasto 'l' sulla 
+    connessione selezionata per abilitare e disabilitare) (viene creato
+    un file del tipo IPrequest-IPbounced:PORT).
+  - ho completato la manpage 
+  - ho inserito vida all'interno di freshmeat.net 
+    (http://freshmeat.net/projects/vida/?topic_id=152%2C150%2C43)
+  - abbiamo inserito una specie di LICENSE file :-)
+
+vida-0.5 (un mese dopo):
+  - ho cambiato un pokino l'impostazione degli header dei file e ho reversato
+    l'history (le ultime modifike x prime) che ora si chiama CHANGELOG;
+  - c'e' un abbozzo di sito rippato da paranoy (index.php);
+  - il Makefile e'riempito :). make x compilare, make install e' ok, make
+    uninstall anke, e c'e' anke make indent ke provvede ad indentare
+    decentemente il codice.
+  - se avviene una connessione mentre e' aperta la connection list viene
+    listata all'istante
+  - l'aggiornamento dei dati trasmessi/ricevuti ora avviene x tutte le
+    connessioni e nn solo x quella selezionata :)
+  - corretti alcuni bugs di visualizzazione in datapipe()
+  - il printing in wdata funziona!! ci sono 4 modalita' switchabili premendo
+    enter sulla connessione interessata oppure con dei tasti appositi.
+    la prima printa i dati in arrivo da client, la seconda quelli dal
+    server, la terza tutte e due, e la quarta idem, ma cambia colore in 
+    base alla provenienza dei dati.
+    ogni cambiamento di modalita' viene segnalato in wdata.
+    la modalita' 1 e' raggiungibile anke premendo il tasto c (client),
+    la 2 con s (server) la 3 con b (both) e la 4 con k (la c era okkupata
+    quindi kolor (come in pine del resto :) ))
+  - quando seleziono un connessione x metterla in modalita' "sniffing",
+    gli status delle altre vengono azzerati con statzero().
+  - cambiate un po' di variabili x il simple hijacking (+ risparmio)
+  - rikiesta la registrazione su sourceforge
+  - abbozzo di man pages (ke viene utilizzata dall'help interno)
+  - il make install copia anke la man pages
+
+vida-0.4:
+  Ho inserito la feature "simple hijacking" che permette premendo il tasto
+  'j' sulla connessione selezionata di sendare una stringa di dati verso un
+  capo o l'altro della connessione (semplice implementazione ma molto 
+  interessante sia per lo studio del funzionamento delle reti che per ludus
+  (irc hijacking :pP)).
+  - l'item "help" mostra il file HELP scrollabile sia verso l'altro che verso
+    il basso (codice rippato e adattato da paranox.sourceforge.net)
+  - mi sono sbattuto graficamente un po' per il banner sopra ogni source.
+  - ho scritto totalmente fino a qua questo primo pezzo di HISTORY che verra'
+    (spero) costantemente aggiornato, certamente in modo piu' schematico e 
+    "oggettivo". -embyte-
+
+
+vida-0.3:
+  Da questa versione vida risulta divista in file separati per una migliore
+  gestione e ottimizzazione del codice (per compilare basta un semplice make,
+  i parametri e tutto il resto viene letto dal classico Makefile). 
+  lesion ha corretto ancora qualche bug relativo alla cancellazione delle 
+  connessioni, inoltre:
+  - lesion sta lavorando per inserire il supporto all'intercettazione delle
+    richieste dns e in modo da spoofarle e redirigere il traffico attraverso
+    vida.
+    da notare che una parte del codice e' stata rippata (vedi dnshijacking.c)
+  - anche se non ho ancora controllato dovrebbe essere stato attivato il sito
+    del progetto vida (di cui ora si parla piu' seriamente) presso sourceforge
+    (lo si fara' anche per freshmeat). -embyte-
+
+
+vida-0.2.3:
+  Molti bugs sono stati corretti e alcune implementazioni carine e importanti
+  sono state aggiunte/corrette:
+  - la cancellazione delle connessioni e dei datapipe (eseguibile con il tasto
+    'canc' o 'd') e' ora quasi perfetta, rimane un problema sull'accept() di
+    datapipe() durante la chiamata pthread_cancel()). il thread non viene 
+    eliminato e la porta assegnata a quel datapipe rimane in listen.
+  - e' possibile stampare e quindi sniffare il traffico di passaggio
+    attraverso il datapipe e sulla connessione selezionata (uso del tasto
+    'invio') (questa feature era stata momentaneamente rimossa dalla versione
+    0.2 fino alla 0.2.3). rimane pero' un problema di fondo, funziona solo
+    sotto  quindi vida perderebbe gran parte del suo fascino. percio' 
+    e' stato deciso di eliminare nelle versioni successive tale implementazione
+    (la trovate solo nella 0.2.3) in attesa di una perfettamente funzionante
+    (lesion sta pensando all'uso grezzo del terminale da LINES/2 in giu).
+  - accanto a ogni datapipe e' possibile vedere "in diretta" il numero delle
+    connessioni che sta gestendo
+  - accanto a ogni connessione (nel datapipe's sottomenu) e' possibile vedere
+    "in diretta" il numero di byte trasferiti (sia da un verso che dall'altro)
+    [ricordo che una parola quale 'user(invio)' porta via 5/6 byte (4 di user 
+    + 1 per il \n e 1 per il \r se il client usato e' ad esempio telnet)].
+    -embyte-
+
+
+vida-0.2:
+  A questo punto entra in gioco lesion il quale apporta un non poco
+  miglioramento a vida. Continui rimbalzi di codice ed email portano alla
+  nascita della versione 0.2, riscritta completamente utilizzando la libreria
+  ncurses (dal man : CRT screen handling and optimization package).
+  Vida supporta ora piu' datapipe contemporeamente e come prima piu' 
+  connessioni per ciascuno (la cosa e' stata realizzata con due thread 
+  annidati, uno piu' esterno per la gestione dei datapipe (vedi funzione 
+  datapipe()) e l'altro per routare il traffico delle singole connessioni 
+  (vedi funzione handler()). -embyte-
+
+
+vida-0.1:
+  Vado a memoria: ho sistemato due cose:
+  - La connessione e' ora bidirezionale (controllo entrambi i socket 
+    descriptor con una select() in polling e di conseguenza sendo a 
+    destra o a sinista).
+  - Il datapipe supporta numerose connessioni contemporaneamente (la
+    funzione main crea il socket descriptor in listening e accetta le
+    richieste per poi forkarsi e lasciare il compito di datapipe vero e
+    proprio a ncnt()). -embyte-
+
+
+vida-0.0 (middle of June 2002): 
+  Il primo source funzionante. Inizialmente il nome del progetto,
+  di cui del resto non se ne parlava ancora (anche perche' ero l'unico
+  ad aver codato queste poche righe di C) era semplicemente datapipe.
+  Come potete leggere dalla prima riga del sorgente l'unica mia intenzione
+  era quella di codare un semplice datapipe da utilizzare nella mia
+  home_lan. Infatti tutto cio' che faceva la versione 0.0 era routare
+  i pacchetti in arrivo sulla porta indicata (argv[1]) verso l'host 
+  argv[2]:argv[3] (da notare che non avevo ancora scritto la routine
+  per rimandare i dati indietro per cui una connessione di questo tipo
+  era totalmente monodirezionale :P). C'era anche il supporto file-logging
+  in quanto il sorgente inizialmente era stato rippato da un altro source
+  che si evolvera' in un codice assurdo di nome ss (??) (beh ora anche 
+  carino :P) -embyte-

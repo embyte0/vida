@@ -1,0 +1,94 @@
+        
+	   ===========================================
+	   Vida - Visual Interactive Datapipe
+
+	   no (c) 2002 - Embyte & Lesion - README FILE
+	   =========================================== 
+           
+
+INTRO:
+Datapipe is a pipe between two sockets like a "network pipeline".
+
+From man bash:
+A pipeline is a sequence of one or more commands separated by the character |. 
+The format for a pipeline is : command1 | command2 
+The standard output of command1 is connected to the standard input of command2.
+
+Datapipe makes a pipe between a listen port on the machine it's being run on
+and a port on the remote machine. For example if we create a datapipe like
+this: 25->mail.tin.it:25 all the incoming smtp request to machine pipe it's
+being run on will be redirect to mail.tin.it (and so telnetting to port 25 
+on localhost is the same as telnetting to port 25 of tin smtp server). 
+
+Datapipe can be used for a variety of purpose: 
+redirect connection which require ident answer (sendmail or irc for example) 
+so that identd show username of datapipe PID process;
+redirect call for a daemon firewalled (for example if ssh is firewalled we
+can create a datapipe on a non-firewalled port like : 5000->localhost:22);
+using the future features dns-spoofing and arp-poisoning to redirect request
+to own machine to sniff/hijacking/kill/log connection. 
+This is the scenario:
+normal connection:      victim user <--- telnet protocol ---> 23:server
+redirected connection:  victim user <----> 23:attakker <----> 23:server
+Attakker spoof dns-answer or make arp-poisoning (on switched LAN) and makes
+unaware victim to connect to himself, then use a datapipe to redirect data
+to server. Now attakker can see all traffic between victim and server, log it
+or push his data into connection :-)
+The same thing is possible using a html or javascript code (for example a
+irc javascript client, like those present on web page of your favourite irc
+server) so that victim girl think to join her favorite server, but connect
+to attakker PC who bounce (or read/hijack) her private messages :-)    
+
+MINI-DESCRIPTION:
+Vida is a multi-datapipe handler, written in C with ncurses library
+for unix and unix-like OS.
+
+FEATURES:
+- visual interface built with ncurses library
+- multiple datapipes
+- multiple connections for each datapipe
+- computes the total of sent and received bytes
+- sniffing a routed connection (monodirectional, bidirectional and to colors)
+- simple hijacking of a routed connection (in both  directions)
+- dns-hijacking of a dns-spoofed connection over switched LAN
+- some logging formats
+- * some features are not yet implementated *
+- * some features will be implementated in the future release *
+
+HELP:
+Read manpage (type 'man help' form shell) or select 'Help' item from Vida
+main menu
+
+INSTALL:
+To install Vida you must:
+0. Check and install dependence (ncurses, libnet and libpcap library).
+   Retrive theme here:
+   libncurses    <http://www.gnu.org/software/ncurses/ncurses.html>
+   libnet        <http://www.packetfactory.net/libnet/>
+   libpcap       <http://www.tcpdump.org/#current>			
+1. Extract tar.gz archive : 'tar xvfz vida-<version>.tar.gz'
+2. Enter 'vida' directory : 'cd vida'
+3. Read this README : 'less README' or 'more README'
+4. Build Vida binary: 'make'
+5. (Optional) Install Vida : 'make install'
+   This command copy vida binary-file to /usr/bin and
+   vida man-page (and online help) to /usr/man/man1
+6. Run Vida with 'vida' or just './vida' if you have jumped previous point.
+   
+UNINSTALL:
+Type 'make clean' or 'make install' from src directory (vida)
+
+AVAILABILITY:
+Vida project web site is at :
+  http://vidatapipe.sourceforge.net
+  http://freshmeat.net/projects/vida
+Vida current version is downloadable at
+  http://vidatapipe.sourceforge.net/vida-current.tar.gz
+  
+LICENSE and CHANGELOG:
+Read 'LICENSE' file 
+Read 'CHANGELOG' file for english version and 'CHANGELOG_it' for italian
+
+GREETING:
+I (embyte) owe a special thank-you to my family and my girlfriend having
+bear myself, and a great regard to all acari and friends :* 

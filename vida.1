@@ -1,0 +1,130 @@
+.TH vida 1 "2003/06/28" "vida 0.8"
+.SH NAME
+Vida \- Visual Interactive Datapipe
+.SH SYNOPSIS
+.BI vida
+.SH DESCRIPTION
+Multi-datapipe handler, written in C with ncurses library,
+works under Unix and Unix-like operating systems as Linux 
+(has been coded with my Slackware Linux).
+.br
+See CHANGELOG file for its history and how is born :-) 
+.SH FEATURES 
+.br
+- visual interface built with ncurses library
+.br
+- multiple datapipes
+.br
+- multiple connections for each datapipe
+.br
+- password authentication over datapipes
+.br
+- computes the total of sent and received bytes 
+.br
+- sniffing a routed connection (monodirectional, bidirectional and to colors, packages matching a string)
+.br
+- simple hijacking of a routed connection (in both directions)
+.br
+- dns-hijacking of a dns-spoofed connection over hubed LAN (a switched LAN requires ARP-poisoning)
+.br
+- logging to text file
+.br
+.SH HELP
+.br
+Vida screen is divided in three areas, you can \fIswitch to each other with TAB key\fP. 
+.br 
+With the exclusion of these you can find infos at the top in a row where vida writes infos, 
+errors, inserting fields and so on, take a look! 
+.P
+The main menu is located onto the left side; 
+there you could :
+.TP
+1- \fIcreate a datapipe ('c')\fP : 
+Is required inserting the port where the datapipe should listen, 
+the pair host:port to redirect all the incoming traffic to and (optional)
+a password for datapipe authentication.
+Done that you should observe that all created datapipes are being 
+listed in the right side window as listen_port->redirected_host:port 
+(number of routing connection at the time, or rather amount of connected 
+host to the port in listen mode). Such connections could being showed 
+pressing the 'enter' key on any datapipe, 
+they will appear as connected_host:port (sent/received bytes).
+.br
+At this time vida allows with some special keys to: 
+.TP
+1.1- \fIsniff the routed traffic over datapipe ('enter')\fP :
+(It will be displayed in the third window, at the bottom). 
+.br 
+There are four switchable modes available with the 'enter' key press on chosen connection 
+or with other special keys. The first prints incoming data from the client 
+('\fIc\fP' key / \fIonly 1 enter\fP), the second one prints the incoming data 
+from the server ('\fIs\fP' key / \fI2 enter\fP), the third mode prints both 
+('\fIb\fP' key / \fI3 enter\fP), the fourth mode is the same as the third 
+except it changes the colour for each provenience ('\fIk\fP' key / \fI4 enter\fP),
+the last allow to insert a string with which packages are compared, see above 
+('\fIm\fP' key / \fI5 enter\fP).
+.TP
+1.2 -\fIlog to file ('l')\fP : 
+It's possible to enable or disable in real time 
+the file-logging (it creates a different file name for each connection 
+(receiving_client-localhost:listen_mode_port-host_to_redirect_to:port) and 
+this file contains also the datapipe's infos; if the file exists all 
+data is written in append mode)
+.TP
+1.3- \fIhijack piped connections ('j')\fP : 
+Vida ask you in which side of the datapipe it has to send data to 
+(answer with 1 or 2) and the insert data (as a 1024-byte-max string).
+.TP
+1.4- \fIdelete connection or datapipe ('canc' or 'd')\fP :
+Just press '\fIcanc\fP' or '\fId\fP' over a selected connection 
+(\fIthis kill connection!\fP) or datapipe (\fI this kill all 
+connection over that datapipe!\fP)
+.TP
+2- \fIperform DNS spoofing ('d')\fP :
+This is the scenario on which we operate:
+
+DNS-server <---- smtp.localnet = ? ---- Victim
+                                          ^
+.br
+   Attaker ---- smtp.localnet is anIP ----|
+.br
+
+You must insert the domain name you'd like to spoof and the resolved ip (its new ip ;). 
+I can think an example like this: hostname=router.localnet, ip=a decoy telnetd.
+.P
+3- \fIshow this manpage ('h')\fP
+.P
+4- \fIcome back to the shell ('g')\fP
+.P   
+5- \fIexit the program ('q')\fP
+.P 
+.SH BUGS
+Report bugs to the authors by email attaching a txt description 
+as much detailed as you can. Many thanks!
+.SH AUTHORS
+embyte @ embyte@madlab.it
+.br
+lesion @ lesion@autistisci.org
+.SH AVAILABILITY
+Vida project web site is at :
+.br
+http://vidatapipe.sourceforge.net 
+.br
+http://freshmeat.net/projects/vida
+.P
+Vida current version is downloadable at http://vidatapipe.sourceforge.net/vida-current.tar.gz
+.br
+The most recent release and CVS are available for download from http://cvs.vidatapipe.sourceforge.net
+.SH REQUIREMENTS
+libncurses    <http://www.gnu.org/software/ncurses/ncurses.html>
+.br
+libnet-1.1    <http://www.packetfactory.net/libnet/>
+.br
+libpcap       <http://www.tcpdump.org/#current>
+.P
+.SH LICENSE
+Vida is released under public domain!!
+.br
+share and enjoy!!
+.br
+no (c) 2002-2003

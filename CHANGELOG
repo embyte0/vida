@@ -1,0 +1,135 @@
+vida-0.8devel: (middle of June 2003):
+  - Finally has been added DNS Spoofing support. This is in BETA. 
+  - Code cleaned
+  - Add some english comment. It so much remains job to make.
+  - Info() has been changed
+  - indent use -kr flags but Embyte prefers jed :-)
+  - Changed mvwaddstr with mvwprintw
+  
+vida-0.7.1:
+  - Vida can now print packages that matched a given string (grep over
+    TCP payload)
+  - I have arranged manpage
+  
+vida-0.7:
+  - datapipe password support - now you can use vida as an autenticated
+    wingate, bouncer or proxy to hide your IP. I haven't implemented a 
+    multy-account system but only a single password autentication which is much
+    sufficient for a datapipe 
+  - README file has being written (I think lesion has just included it the
+    0.6 package, but it will be insert officialy from this release on)
+  - correct some mini-bug
+    
+vida-0.6:
+  - added file-logging support (use 'l' on the choosed connection to
+    enable and disable) (vida creates a file IPrequest-IPbounced:PORT).
+  - man page completed
+  - vida is now on freshmeat.net
+    (http://freshmeat.net/projects/vida/?topic_id=152%2C150%2C43)
+  - has being insered a pseudo LICENSE file
+
+vida-0.5 (a month later...):
+  - I've changed (a few) the header files setup and reversed the history file
+    (last modifies before) now named CHANGELOG;
+  - there's a sketch of site ripped from paranoy (index.php);
+  - the Makefile is filled :). "make" to compile, "make install"
+    and "uninstall" are ok, and there's also "make indent" to indent the code
+  - if a connection happens meanwhile the connection list is open it will be refreshed
+    instantly
+  - now the update of the amount of sent/received data is for all the connections
+    and not only for the selected one :)
+  - fixed some bugs of displaying in datapipe()
+  - the printing in wdata now works!! there are 4 switchable modes pressing
+    enter on the chose connection or with special keys.
+    The first prints incoming data from the client, the second one prints
+    the incoming data from server, the third mode prints both, and the fourth
+    mode is the same as the third except it changes the colour for each provenience.
+    Every mode change is evidenced in wdata.
+    Mode 1 can be selected with 'c' (client) key, mode 2 with 's' (server),
+    mode 3 uses 'b' (both) key and mode 4 with 'k' (c letter was busy and
+    hence kolor (such as pine :) ))
+  - when I pick out a connection to bring it in 'sniffing' mode, the status flags
+    of the other are zeroed with statzero().
+  - some variables changes for the simple hijacking
+  - sourceforge registration requested
+  - sketch of man page
+  - "make install" install also man pages
+
+vida-0.4:
+  I've added "simple hijacking" feature allowing, with the 'j' key press on the
+  selected connection, to send a data string straight to either a direction or the
+  other (simple implementation...but very interesting for studying how the nets work
+  and also for ludus. (irc hijacking :pP)).
+  - the "help" item shows the HELP file scrollable up and down (ripped and fitted
+    from paranox.sourceforge.net)
+  - i've added the banner onto each source.
+  - i've written (all alone) this HISTORY that it will evolve in a much schematic
+    way.
+
+
+vida-0.3:
+  Starting with this release vida is divided in separate files for a better maintenance
+  and optimisation of the code (to compile simply type make, all is going to be read
+  from the Makefile). lesion has fixed some bugs related to the delete of the connections,
+  and moreover:
+  - lesion is working to add the dns request interception to spoofing them and
+    redirect the traffic throughout vida. (one part of the code was ripped
+    (see dnshijacking.c))
+  - I think that the vida's project web site is up and running on sourceforge (it will
+    be available also on freshmeat)
+
+
+vida-0.2.3:
+  A lot of bugs were fixed and some pretty features were added or improved:
+  - deleting of connections or datapipes (available with 'canc' or 'd' key)
+    is now almost perfect; there is only a problem in the accept() of datapipe()
+    during the pthread_cancel() function call). The thread ain't be deleted and
+    the bound port remains in listen mode.
+  - It's possible to print and sniff the traffic throughout the datapipe and
+    in the selected connection (with the 'enter' key) (this feature was removed
+    between 0.2 and 0.2.3 releases). However there is basically a problem: it works
+    only under X and hence vida lose a big slice of its charming, thus we decided
+    to remove this feature (available only in the 0.2.3 release) in the following
+    versions until the release of a full working one. (lesion is thinking about the
+    raw use of the terminal from LINES/2 to the bottom).
+  - Near each datatipe you can see in real time the number of the connections that it's
+    going to handle
+  - Near each connection (in the datapipe's menu) is it possible to see in real time the
+    amount of transferred bytes (in both directions)
+    [remember that a single word like 'user(enter)' takes 5/6 bytes (4 of user +
+    1 for the \n and another 1 for the \r if the client is, for example, telnet)].
+
+
+
+vida-0.2:
+  At this time lesion join the game. He improves very much the vida project.
+  A lot of send-and-receive (code and emails) between us allow the birth the
+  0.2 release, totally rewritten using the ncurses library (from its man page:
+  CRT screen handling and optimisation package). Vida now supports more datapipes
+  at the same time and as before a lot of connections for each (It was developed
+  with the aid of two nested threads, the outer one handles the datapipes (see
+  datapipe() func.) and the inner one routes the whole traffic to the single
+  connections (see handler() func.).
+
+
+vida-0.1:
+  I've fixed to things:
+  - Now the connection is bi-directional (I check both the socket descriptors
+    with a polling select() and hence I send to the right or the left).
+  - The datapipe support a lot of connections at the same time (the main function
+    creates the socket descriptor in listening mode and accepts the requests;
+    the it "forkes" itself and let the datapipe handling to the ncnt
+    function).
+   
+
+vida-0.0 (middle of June 2002):
+  The first working release. In the beginning, the name of the whole
+  project was "datapipe". As you could read in the first line of the
+  source file, my starting aim was to develop a simple datapipe for
+  my own home-LAN. The only 0.0 release functionality was to route the
+  incoming packets on the specified port (argv[1]) to the host
+  argv[2]:argv[3] (I didn't write the reply-data routine and
+  hence the connection was totally monodirectional). There also was
+  support for file logging since the source was initially ripped from
+  another source that will evolve into an absurd code named ss (??)
+  (now is also pretty :P)
